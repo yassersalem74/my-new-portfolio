@@ -141,3 +141,229 @@
 @utility button-secondary {
   @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl border-2 border-border bg-surface/60 px-6 py-3.5 text-sm font-bold text-ink transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-surface motion-reduce:transform-none sm:text-base;
 }
+
+.logo-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 50% 40%, var(--theme-glow), transparent 55%), var(--theme-canvas);
+  opacity: 1;
+  transition: opacity 250ms ease;
+}
+
+.logo-loader-content {
+  animation: logo-arrive 400ms ease-out both;
+  transition: transform 250ms ease;
+}
+
+.logo-loader-stage {
+  position: relative;
+  width: clamp(220px, 24vw, 280px);
+  aspect-ratio: 1;
+}
+
+.logo-loader-stage::before {
+  content: '';
+  position: absolute;
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--brand-primary) 16%, transparent), transparent 70%);
+  filter: blur(14px);
+  animation: logo-glow 2s ease-in-out infinite alternate;
+}
+
+.logo-loader-glyph {
+  font-family: var(--font-sans);
+  font-size: 132px;
+  font-weight: 800;
+  letter-spacing: -26px;
+}
+
+.logo-loader-outline {
+  fill: color-mix(in srgb, var(--brand-primary) 3%, transparent);
+  stroke: var(--brand-primary);
+  stroke-width: 1px;
+  stroke-opacity: 0.45;
+}
+
+.logo-loader-track,
+.logo-loader-ticks,
+.logo-loader-arcs {
+  fill: none;
+  stroke: var(--brand-primary);
+}
+
+.logo-loader-track {
+  stroke-width: 1px;
+  stroke-opacity: 0.14;
+}
+
+.logo-loader-ticks {
+  stroke-width: 2px;
+  stroke-opacity: 0.22;
+  stroke-linecap: round;
+}
+
+.logo-loader-arcs {
+  stroke-width: 2px;
+  stroke-linecap: round;
+}
+
+.logo-loader-orbit {
+  transform-origin: 120px 120px;
+  animation: logo-orbit 3.5s linear infinite;
+}
+
+.logo-loader-spark {
+  fill: var(--brand-primary);
+  filter: drop-shadow(0 0 5px var(--brand-primary));
+}
+
+.logo-loader-liquid {
+  transform: translateY(185px);
+  animation: logo-liquid-rise 1.4s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+  transition: transform 280ms ease;
+}
+
+.logo-loader-wave {
+  animation: logo-wave 1.2s linear infinite;
+}
+
+.logo-loader-wave--back {
+  animation-direction: reverse;
+  animation-duration: 1.8s;
+}
+
+.logo-loader-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.logo-loader-dots i {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--brand-primary);
+  animation: logo-dot 1s ease-in-out infinite;
+}
+
+.logo-loader-dots i:nth-child(2) { animation-delay: 120ms; }
+.logo-loader-dots i:nth-child(3) { animation-delay: 240ms; }
+
+.logo-loader--complete .logo-loader-liquid {
+  animation: none;
+  transform: translateY(42px);
+}
+
+.logo-loader--exiting {
+  opacity: 0;
+}
+
+.logo-loader--exiting .logo-loader-content {
+  animation: none;
+  transform: scale(1.04);
+}
+
+/* Keep the navbar mark filled, with a gentle wave and a slower orbit. */
+.logo-mark--compact {
+  width: 64px;
+}
+
+.logo-mark--compact::before {
+  animation: none;
+  filter: blur(8px);
+  opacity: 0.65;
+}
+
+.logo-mark--compact .logo-loader-liquid {
+  animation: none;
+  transform: translateY(78px);
+}
+
+.logo-mark--compact .logo-loader-orbit {
+  animation-duration: 14s;
+}
+
+.logo-mark--compact .logo-loader-wave {
+  animation-duration: 3s;
+}
+
+.logo-mark--compact .logo-loader-wave--back {
+  animation-duration: 4.5s;
+}
+
+.logo-mark--compact .logo-loader-track {
+  stroke-width: 2px;
+  stroke-opacity: 0.25;
+}
+
+.logo-mark--compact .logo-loader-ticks {
+  stroke-width: 3px;
+  stroke-opacity: 0.3;
+}
+
+.logo-mark--compact .logo-loader-arcs {
+  stroke-width: 4px;
+}
+
+.logo-mark--compact .logo-loader-outline {
+  stroke-width: 2px;
+}
+
+@media (min-width: 640px) {
+  .logo-mark--compact {
+    width: 68px;
+  }
+}
+
+@keyframes logo-arrive {
+  from { opacity: 0; transform: translateY(6px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes logo-glow {
+  from { opacity: 0.45; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1.15); }
+}
+
+@keyframes logo-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes logo-liquid-rise {
+  from { transform: translateY(185px); }
+  to { transform: translateY(78px); }
+}
+
+@keyframes logo-wave {
+  to { transform: translateX(-120px); }
+}
+
+@keyframes logo-dot {
+  0%, 80%, 100% { opacity: 0.35; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-loader,
+  .logo-loader *,
+  .logo-loader-dots i,
+  .logo-loader-stage::before,
+  .logo-mark--compact *,
+  .logo-mark--compact::before {
+    animation: none;
+    transition: none;
+  }
+
+  .logo-loader-liquid,
+  .logo-mark--compact .logo-loader-liquid {
+    transform: translateY(42px);
+  }
+
+  .logo-loader--exiting .logo-loader-content {
+    transform: none;
+  }
+}

@@ -55,6 +55,10 @@ public/
 
 Every navigation item opens a separate page. The shared navbar highlights the current route and collapses into a keyboard-accessible mobile menu.
 
+A YS outline fills with an orange gradient and moving liquid waves, surrounded by orbiting accents and a soft glow, on the initial document load and each browser refresh. The loading boundary lives above the router, so navigation between pages never replays it. It waits for the document load with a short minimum display time and a 4.5-second fallback; reduced-motion preferences receive a brief static logo. All loader colors derive from the central theme variables.
+
+The navbar reuses the same `BrandMark` in a compact size, without captions. Its letters remain filled with a gentle wave and a slower orbit; clicking the mark returns home. Reduced-motion preferences use a static, fully filled mark.
+
 Profile assets and navigation can be updated in `src/data/portfolio.js`. The home statistics are in `src/components/home/HeroStats.jsx`. Content on the supporting pages is a starting point for further customization.
 
 ## Static hosting
