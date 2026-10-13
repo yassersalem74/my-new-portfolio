@@ -1,0 +1,163 @@
+[
+  {
+    "id": "nanos",
+    "title": "NANOS",
+    "description": "Dessert Brand Website",
+    "overview": "A colorful website for NANOS, a dessert brand focused on sweet moments and seasonal treats. The experience introduces the brand, showcases its menu, and brings its story and event offerings together in a responsive interface.",
+    "features": [
+      "A bright, dessert-inspired visual identity",
+      "Responsive layouts for desktop, tablet, and mobile",
+      "Menu and product presentation with rich visuals",
+      "Brand story and event sections",
+      "Clear navigation between the website's pages"
+    ],
+    "details": {
+      "type": "Dessert Brand Website",
+      "status": "Live",
+      "role": "Front-End Development & UI/UX Design",
+      "platform": "Web"
+    },
+    "gallery": [
+      { "src": "/projects/nanos-desktop.png", "label": "Desktop view", "type": "desktop" },
+      { "src": "/projects/nanos-mobile.png", "label": "Mobile view", "type": "mobile" }
+    ],
+    "tags": ["React", "Tailwind CSS", "Responsive", "UI/UX Design"],
+    "image": "/projects/nanos-desktop.png",
+    "mobileImage": "/projects/nanos-mobile.png",
+    "url": "https://nanos-eight.vercel.app/",
+    "featured": true,
+    "cover": "dessert",
+    "headline": ["Sweet Moments,", "Always in Season"]
+  },
+  {
+    "id": "more-solutions",
+    "title": "&More Solutions",
+    "description": "Corporate Website",
+    "overview": "A corporate website for &More Solutions, presenting its marketing, technology, and business services. The design pairs a distinctive visual identity with clear service information and a straightforward path to contact the team.",
+    "features": [
+      "A cohesive corporate visual identity",
+      "Dedicated marketing, technology, and business service content",
+      "Company information and reasons to choose the team",
+      "Clear contact calls to action",
+      "Responsive navigation and layouts across screen sizes"
+    ],
+    "details": {
+      "type": "Corporate Website",
+      "status": "Live",
+      "role": "Front-End Development & UI/UX Design",
+      "platform": "Web"
+    },
+    "gallery": [
+      { "src": "/projects/more-solutions-desktop.png", "label": "Desktop view", "type": "desktop" },
+      { "src": "/projects/more-solutions-mobile.png", "label": "Mobile view", "type": "mobile" }
+    ],
+    "tags": ["React", "Tailwind CSS", "UI/UX Design", "Responsive"],
+    "image": "/projects/more-solutions-desktop.png",
+    "mobileImage": "/projects/more-solutions-mobile.png",
+    "url": "https://www.andmoresolutions-eg.com/",
+    "featured": true,
+    "cover": "studio",
+    "headline": ["Marketing", "Technology", "Business Solutions"]
+  },
+  {
+    "id": "middle-east-egypt",
+    "title": "Middle East Egypt",
+    "description": "Chemical Materials Website",
+    "overview": "A business website for Middle East Egypt that presents its chemical materials and the industries it serves. The interface organizes product and company information into clear pages, helping visitors explore the business and find contact information.",
+    "features": [
+      "Chemical materials and product information",
+      "Industry-focused content and navigation",
+      "Company and exhibition pages",
+      "Contact information and inquiry calls to action",
+      "Responsive desktop and mobile presentation"
+    ],
+    "details": {
+      "type": "Chemical Materials Website",
+      "status": "Live",
+      "role": "Front-End Development",
+      "platform": "Web"
+    },
+    "gallery": [
+      { "src": "/projects/middle-east-egypt-desktop.png", "label": "Desktop view", "type": "desktop" },
+      { "src": "/projects/middle-east-egypt-mobile.png", "label": "Mobile view", "type": "mobile" }
+    ],
+    "tags": ["React", "Vite", "Dashboard", "Responsive"],
+    "image": "/projects/middle-east-egypt-desktop.png",
+    "mobileImage": "/projects/middle-east-egypt-mobile.png",
+    "url": "https://middle-east-seven.vercel.app/",
+    "featured": true,
+    "cover": "industry",
+    "headline": ["Your Trusted Partner", "In Chemical Materials"]
+  },
+  {
+    "id": "alaa-eldien",
+    "title": "Alaa Eldien",
+    "description": "Multi-role Platform (Services, Marketplace, Store, Real Estate)",
+    "overview": "A multi-role platform bringing services, a marketplace, a store, and real estate into one application. Built around a React interface with Node.js and MongoDB, the project brings several user journeys together in a shared experience. The live preview opens the public sign-in page.",
+    "features": [
+      "Services, marketplace, store, and real estate areas",
+      "A multi-role application experience",
+      "Account sign-in as the public entry point",
+      "A React interface supported by Node.js and MongoDB",
+      "Responsive layouts for desktop and mobile"
+    ],
+    "details": {
+      "type": "Multi-role Web Platform",
+      "status": "Live — sign-in required",
+      "role": "Front-End Development & UI/UX Design",
+      "platform": "Web"
+    },
+    "gallery": [
+      { "src": "/projects/alaa-eldien-desktop.png", "label": "Desktop sign-in", "type": "desktop" },
+      { "src": "/projects/alaa-eldien-mobile.png", "label": "Mobile sign-in", "type": "mobile" }
+    ],
+    "tags": ["React", "Node.js", "MongoDB", "Responsive", "UI/UX Design"],
+    "image": "/projects/alaa-eldien-desktop.png",
+    "mobileImage": "/projects/alaa-eldien-mobile.png",
+    "url": "https://alaa-eldien.vercel.app/",
+    "featured": true,
+    "cover": "platform",
+    "headline": ["Everything", "You Need", "In One Place"]
+  },
+  {
+    "id": "sammly",
+    "title": "Sammly",
+    "description": "T-shirt Customization Platform",
+    "overview": "A clothing customization platform where visitors can explore products and create their own style. The project connects a product browsing experience with a dedicated customization flow, presented through a responsive React interface.",
+    "features": [
+      "Clothing and T-shirt product browsing",
+      "A dedicated product customization experience",
+      "Clear navigation between products and the designer",
+      "A consistent shopping interface and visual identity",
+      "Responsive layouts for desktop, tablet, and mobile"
+    ],
+    "details": {
+      "type": "T-shirt Customization Platform",
+      "status": "Live",
+      "role": "Front-End Development & UI/UX Design",
+      "platform": "Web"
+    },
+    "gallery": [
+      { "src": "/projects/sammly-desktop.png", "label": "Desktop view", "type": "desktop" },
+      { "src": "/projects/sammly-mobile.png", "label": "Mobile view", "type": "mobile" }
+    ],
+    "tags": ["React", "Tailwind CSS", "Dashboard", "UI/UX Design"],
+    "image": "/projects/sammly-desktop.png",
+    "mobileImage": "/projects/sammly-mobile.png",
+    "url": "https://react-designer-e-commerce-dopv.vercel.app/",
+    "featured": true,
+    "cover": "custom",
+    "headline": ["Design", "Your Style"]
+  },
+  {
+    "id": "other-projects",
+    "title": "Other Projects",
+    "description": "Explore more projects and source code on my GitHub profile",
+    "tags": ["GitHub", "Open Source", "Repositories"],
+    "image": null,
+    "url": "https://github.com/yassersalem74",
+    "featured": true,
+    "cover": "github",
+    "headline": ["More projects.", "On GitHub."]
+  }
+]

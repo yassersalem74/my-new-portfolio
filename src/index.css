@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* Change this one brand value to recolor the whole portfolio. */
+:root {
+  --brand-primary: #fe5316;
+  --brand-primary-light: color-mix(in srgb, var(--brand-primary) 72%, white);
+  --brand-primary-dark: color-mix(in srgb, var(--brand-primary) 75%, black);
+
+  --theme-accent: var(--brand-primary-dark);
+  --theme-canvas: #fffaf5;
+  --theme-surface: #ffffff;
+  --theme-surface-alt: color-mix(in srgb, var(--brand-primary) 8%, var(--theme-surface));
+  --theme-surface-soft: color-mix(in srgb, var(--brand-primary) 5%, var(--theme-surface));
+  --theme-ink: #191d25;
+  --theme-muted: #60616f;
+  --theme-border: color-mix(in srgb, var(--brand-primary) 18%, var(--theme-surface));
+  --theme-glow: color-mix(in srgb, var(--brand-primary) 17%, var(--theme-canvas));
+  --theme-glow-strong: color-mix(in srgb, var(--brand-primary) 36%, var(--theme-canvas));
+  --theme-dot: color-mix(in srgb, var(--brand-primary) 35%, var(--theme-canvas));
+  --theme-on-primary: #191410;
+  --theme-success: #176b43;
+  --theme-success-soft: #eaf9f0;
+  --theme-error: #a6273b;
+  --theme-error-soft: #fff0f1;
+  --theme-shadow-card: 0 8px 28px -18px color-mix(in srgb, var(--brand-primary) 24%, transparent);
+  --theme-shadow-card-hover: 0 14px 32px -15px color-mix(in srgb, var(--brand-primary) 30%, transparent);
+  --theme-shadow-primary: 0 10px 24px -10px color-mix(in srgb, var(--brand-primary) 55%, transparent);
+  --theme-shadow-primary-hover: 0 14px 28px -10px color-mix(in srgb, var(--brand-primary) 65%, transparent);
+  --theme-shadow-portrait: 0 18px 60px -28px color-mix(in srgb, var(--brand-primary) 45%, transparent);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --theme-accent: var(--brand-primary-light);
+  --theme-canvas: #10151e;
+  --theme-surface: #1b222e;
+  --theme-surface-alt: #282e39;
+  --theme-surface-soft: #222833;
+  --theme-ink: #f6f7fb;
+  --theme-muted: #b6bdca;
+  --theme-border: #3b404a;
+  --theme-glow: color-mix(in srgb, var(--brand-primary) 15%, var(--theme-canvas));
+  --theme-glow-strong: color-mix(in srgb, var(--brand-primary) 33%, var(--theme-canvas));
+  --theme-dot: color-mix(in srgb, var(--brand-primary) 42%, var(--theme-canvas));
+  --theme-success: #8be0b5;
+  --theme-success-soft: #16382b;
+  --theme-error: #ffb4bf;
+  --theme-error-soft: #3c2229;
+  --theme-shadow-card: 0 12px 30px -18px #00000090;
+  --theme-shadow-card-hover: 0 16px 35px -15px #000000b0;
+  --theme-shadow-primary: 0 10px 30px -12px color-mix(in srgb, var(--brand-primary) 80%, transparent);
+  --theme-shadow-primary-hover: 0 12px 34px -10px color-mix(in srgb, var(--brand-primary) 85%, transparent);
+  --theme-shadow-portrait: 0 20px 70px -25px color-mix(in srgb, var(--brand-primary) 50%, transparent);
+  color-scheme: dark;
+}
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-handwriting: 'Caveat', cursive;
+  --color-primary: var(--brand-primary);
+  --color-primary-light: var(--brand-primary-light);
+  --color-primary-dark: var(--brand-primary-dark);
+  --color-accent: var(--theme-accent);
+  --color-ink: var(--theme-ink);
+  --color-muted: var(--theme-muted);
+  --color-canvas: var(--theme-canvas);
+  --color-surface: var(--theme-surface);
+  --color-surface-alt: var(--theme-surface-alt);
+  --color-surface-soft: var(--theme-surface-soft);
+  --color-border: var(--theme-border);
+  --color-glow: var(--theme-glow);
+  --color-glow-strong: var(--theme-glow-strong);
+  --color-dot: var(--theme-dot);
+  --color-on-primary: var(--theme-on-primary);
+  --color-success: var(--theme-success);
+  --color-success-soft: var(--theme-success-soft);
+  --color-error: var(--theme-error);
+  --color-error-soft: var(--theme-error-soft);
+  --color-code-bg: #151b25;
+  --color-code-ink: #edf2fa;
+  --color-code-muted: #9ba8bc;
+  --color-code-keyword: var(--brand-primary-light);
+  --color-code-string: #ffd079;
+  --color-code-type: #dcabf5;
+  --color-code-value: #60dfc2;
+  --color-device: #111722;
+  --color-device-screen: #ffffff;
+  --shadow-card: var(--theme-shadow-card);
+  --shadow-card-hover: var(--theme-shadow-card-hover);
+  --shadow-primary: var(--theme-shadow-primary);
+  --shadow-primary-hover: var(--theme-shadow-primary-hover);
+  --shadow-portrait: var(--theme-shadow-portrait);
+  --animate-skill-border: skill-border 5s linear infinite;
+
+  @keyframes skill-border {
+    to {
+      stroke-dashoffset: -100;
+    }
+  }
+}
+
+@layer base {
+  body {
+    @apply m-0 min-w-[320px] bg-canvas font-sans text-ink antialiased;
+    transition: background-color 180ms ease, color 180ms ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body {
+      transition: none;
+    }
+  }
+
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  button:not(:disabled), a {
+    @apply cursor-pointer;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-4 outline-accent;
+  }
+}
+
+@utility page-container {
+  @apply mx-auto w-full max-w-[1760px] px-6 sm:px-10 lg:px-14 xl:px-20;
+}
+
+@utility button-primary {
+  @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl bg-primary px-6 py-3.5 text-sm font-bold text-on-primary shadow-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-light hover:shadow-primary-hover motion-reduce:transform-none sm:text-base;
+}
+
+@utility button-secondary {
+  @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl border-2 border-border bg-surface/60 px-6 py-3.5 text-sm font-bold text-ink transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-surface motion-reduce:transform-none sm:text-base;
+}

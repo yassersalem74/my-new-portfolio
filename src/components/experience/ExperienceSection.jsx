@@ -1,0 +1,25 @@
+import timeline from '../../data/experience.json'
+import ResumeButton from '../ui/ResumeButton'
+import TimelineGroup from './TimelineGroup'
+
+export default function ExperienceSection() {
+  return (
+    <section aria-labelledby="experience-heading" className="relative isolate overflow-hidden bg-gradient-to-br from-canvas via-canvas to-glow/45">
+      <div aria-hidden="true" className="pointer-events-none absolute top-20 right-[8%] h-32 w-40 opacity-40 [background-image:radial-gradient(var(--color-dot)_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
+      <div className="page-container relative pt-8 pb-12 sm:pt-10 sm:pb-16 lg:pt-9">
+        <header className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
+          <div className="max-w-[720px]">
+            <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.035em] text-muted"><span aria-hidden="true" className="h-0.5 w-8 rounded-full bg-primary" />MY JOURNEY</p>
+            <h1 id="experience-heading" className="mt-3 text-[clamp(2.25rem,4.2vw,3.75rem)] leading-[1.12] font-extrabold tracking-[-0.045em]">Education &amp; <span className="text-primary">Experience</span></h1>
+            <p className="mt-4 max-w-[650px] text-sm leading-7 text-muted sm:text-base">From studying computer science to building web applications and guiding developers at ITI — the milestones along my journey.</p>
+          </div>
+          <ResumeButton className="relative z-10 w-full shrink-0 self-start sm:w-auto sm:self-center sm:px-5 sm:text-sm" />
+        </header>
+
+        <div className="mx-auto mt-10 max-w-[1100px] space-y-10 sm:mt-12 sm:space-y-12 lg:mt-14">
+          {timeline.map(group => <TimelineGroup key={group.id} group={group} />)}
+        </div>
+      </div>
+    </section>
+  )
+}

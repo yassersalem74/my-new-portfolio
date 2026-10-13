@@ -1,0 +1,99 @@
+[
+  {
+    "id": "education",
+    "title": "Education",
+    "subtitle": "Academic foundation",
+    "icon": "education",
+    "entries": [
+      {
+        "id": "computer-science-degree",
+        "title": "Bachelor’s in Computer Science",
+        "organization": "Suez Canal University",
+        "description": "Faculty of Computers and Informatics.",
+        "startDate": "2018-09",
+        "endDate": "2022-07",
+        "icon": "education"
+      }
+    ]
+  },
+  {
+    "id": "internships",
+    "title": "Internships",
+    "subtitle": "Learning through practice",
+    "icon": "training",
+    "entries": [
+      {
+        "id": "iti-summer-training",
+        "title": "Front-End Development",
+        "organization": "Information Technology Institute (ITI), Ismailia Branch",
+        "logo": { "src": "/iti-logo.png", "alt": "ITI logo", "width": 2138, "height": 1149 },
+        "label": "Summer Training",
+        "description": "Summer training in the fundamentals of front-end development.",
+        "startDate": "2021-08",
+        "endDate": "2021-10",
+        "icon": "code"
+      },
+      {
+        "id": "iti-intensive-code-camp",
+        "title": "Full-Stack Web Development",
+        "organization": "Information Technology Institute (ITI), Port Said Branch",
+        "logo": { "src": "/iti-logo.png", "alt": "ITI logo", "width": 2138, "height": 1149 },
+        "label": "Intensive Code Camp · MERN",
+        "description": "Comprehensive training in full-stack web development using MongoDB, Express.js, Angular, React, and Node.js.",
+        "skills": ["MongoDB", "Express.js", "Angular", "React", "Node.js"],
+        "startDate": "2024-05",
+        "endDate": "2024-10",
+        "icon": "training"
+      }
+    ]
+  },
+  {
+    "id": "work-experience",
+    "title": "Work Experience",
+    "subtitle": "Building & sharing knowledge",
+    "icon": "work",
+    "entries": [
+      {
+        "id": "x-motion",
+        "title": "Front-End Developer",
+        "organization": "X-Motion",
+        "logo": { "src": "/xmotion_sa_logo.jfif", "alt": "X-Motion logo", "width": 200, "height": 200 },
+        "label": "Part-Time",
+        "highlights": [
+          "Built responsive Angular interfaces using reusable components, forms, routing, services, and REST APIs."
+        ],
+        "skills": ["Angular", "Responsive UI", "REST APIs"],
+        "startDate": "2024-11",
+        "endDate": "2025-07",
+        "icon": "code"
+      },
+      {
+        "id": "iti-external-instructor",
+        "title": "External Instructor",
+        "organization": "Information Technology Institute (ITI)",
+        "logo": { "src": "/iti-logo.png", "alt": "ITI logo", "width": 2138, "height": 1149 },
+        "highlights": [
+          "Delivered technical lectures, hands-on labs, and project-based front-end training."
+        ],
+        "skills": ["Technical Instruction", "Hands-On Labs", "Front-End Training"],
+        "startDate": "2024-12",
+        "endDate": null,
+        "icon": "teaching"
+      },
+      {
+        "id": "iti-teaching-assistant",
+        "title": "Teaching Assistant",
+        "organization": "Information Technology Institute (ITI)",
+        "logo": { "src": "/iti-logo.png", "alt": "ITI logo", "width": 2138, "height": 1149 },
+        "highlights": [
+          "Supported front-end and full-stack training across HTML5, CSS3, JavaScript, ES6, TypeScript, Bootstrap, Tailwind CSS, React, and Angular.",
+          "Reviewed labs, assignments, and projects, and provided technical guidance, debugging support, and feedback."
+        ],
+        "skills": ["HTML5", "CSS3", "JavaScript (ES6)", "TypeScript", "Bootstrap", "Tailwind CSS", "React", "Angular"],
+        "startDate": "2025-07",
+        "endDate": null,
+        "icon": "mentoring"
+      }
+    ]
+  }
+]
