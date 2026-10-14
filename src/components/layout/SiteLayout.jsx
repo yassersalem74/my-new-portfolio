@@ -25,7 +25,7 @@ export default function SiteLayout() {
     <div className="min-h-screen bg-canvas bg-[radial-gradient(ellipse_at_90%_40%,var(--color-glow)_0%,transparent_55%)]">
       <a href="#main-content" className="sr-only fixed top-3 left-3 z-50 rounded-xl bg-primary px-5 py-3 text-on-primary focus:not-sr-only">Skip to content</a>
       <Navbar />
-      <main id="main-content" ref={content} tabIndex={-1} className="outline-none">
+      <main id="main-content" ref={content} tabIndex={-1} className="scroll-mt-24 outline-none lg:scroll-mt-20">
         <MotionPage key={pathname} scene={pathname === '/' ? 'home' : pathname.split('/')[1]}><Outlet /></MotionPage>
       </main>
     </div>
