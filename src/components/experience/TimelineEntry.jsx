@@ -10,19 +10,18 @@ const entryIcons = {
   mentoring: UsersRound,
 }
 
-export default function TimelineEntry({ entry, index }) {
-  const isLeft = index % 2 === 0
+export default function TimelineEntry({ entry }) {
   const Icon = entryIcons[entry.icon] ?? BriefcaseBusiness
   const isCurrent = !entry.endDate
 
   return (
-    <li className="relative min-w-0 pl-12 lg:grid lg:grid-cols-[minmax(0,1fr)_56px_minmax(0,1fr)] lg:gap-x-5 lg:pl-0">
-      <span aria-hidden="true" className="absolute top-6 left-0 z-10 flex size-9 items-center justify-center rounded-full border border-primary/25 bg-surface text-accent ring-[5px] ring-canvas lg:top-5 lg:left-1/2 lg:size-11 lg:-translate-x-1/2">
+    <li className="relative min-w-0 pl-10 sm:pl-16">
+      <span aria-hidden="true" className="absolute top-6 left-0 z-10 flex size-9 items-center justify-center rounded-full border border-primary/25 bg-surface text-accent ring-[5px] ring-canvas sm:size-11">
         <Icon size={19} strokeWidth={1.7} />
       </span>
 
-      <article aria-labelledby={`experience-${entry.id}`} className={`relative min-w-0 rounded-2xl border border-border bg-surface/90 p-5 shadow-card transition-shadow hover:shadow-card-hover sm:p-6 lg:row-start-1 ${isLeft ? 'lg:col-start-1' : 'lg:col-start-3'}`}>
-        <span aria-hidden="true" className={`pointer-events-none absolute top-10 hidden h-px w-12 bg-primary/25 lg:block ${isLeft ? '-right-12' : '-left-12'}`} />
+      <article aria-labelledby={`experience-${entry.id}`} className="relative min-w-0 rounded-2xl border border-border bg-surface/90 p-4 shadow-card transition-shadow hover:shadow-card-hover sm:p-6">
+        <span aria-hidden="true" className="pointer-events-none absolute top-10 -left-4 h-px w-4 bg-primary/25 sm:-left-5 sm:w-5" />
         <span aria-hidden="true" className="absolute right-6 bottom-0 left-6 h-0.5 rounded-full bg-gradient-to-r from-primary/70 to-primary/10" />
 
         {(entry.logo || entry.label || isCurrent) && (
@@ -34,9 +33,13 @@ export default function TimelineEntry({ entry, index }) {
             </div>}
           </div>
         )}
-        <h3 id={`experience-${entry.id}`} className="text-base leading-snug font-extrabold tracking-[-0.025em] sm:text-lg">{entry.title}</h3>
-        <p className="mt-2 text-xs leading-6 font-semibold text-accent sm:text-sm">{entry.organization}</p>
-        <div className="mt-3 border-t border-primary/8 pt-3 lg:hidden"><TimelineDate startDate={entry.startDate} endDate={entry.endDate} /></div>
+        <div className="flex min-w-0 flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-6">
+          <div className="min-w-0 flex-1">
+            <h3 id={`experience-${entry.id}`} className="text-base leading-snug font-extrabold tracking-[-0.025em] sm:text-lg">{entry.title}</h3>
+            <p className="mt-2 text-xs leading-6 font-semibold text-accent sm:text-sm">{entry.organization}</p>
+          </div>
+          <TimelineDate startDate={entry.startDate} endDate={entry.endDate} className="self-start rounded-xl border border-border bg-surface-alt px-3 py-2 md:max-w-[40%]" />
+        </div>
 
         {entry.description && <p className="mt-3 text-sm leading-7 text-muted">{entry.description}</p>}
         {entry.highlights?.length > 0 && (
@@ -51,9 +54,6 @@ export default function TimelineEntry({ entry, index }) {
         )}
       </article>
 
-      <div className={`hidden pt-7 lg:row-start-1 lg:block ${isLeft ? 'lg:col-start-3' : 'lg:col-start-1 lg:text-right'}`}>
-        <TimelineDate startDate={entry.startDate} endDate={entry.endDate} className="rounded-full border border-border bg-surface/80 px-4 py-2" />
-      </div>
     </li>
   )
 }

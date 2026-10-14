@@ -1,13 +1,21 @@
 import { useEffect, useRef, useState } from 'react'
 import { ArrowRight, CheckCircle2, List, LoaderCircle, Mail, MessageCircle, MessageSquareText, Send, ShieldCheck, UserRound } from 'lucide-react'
 import contact from '../../data/contact.json'
-import { submitContactMessage } from '../../utils/contactSubmission'
+import { contactAction, contactFormUrl, createContactPayload, submitContactMessage } from '../../utils/contactSubmission'
 
 const fieldDefinitions = [
   { name: 'name', label: 'Your Name', placeholder: 'Enter your name', type: 'text', autoComplete: 'name', maxLength: 100, Icon: UserRound },
   { name: 'email', label: 'Your Email', placeholder: 'example@gmail.com', type: 'email', autoComplete: 'email', maxLength: 254, Icon: Mail },
   { name: 'subject', label: 'Subject', placeholder: 'Project, job opportunity, etc.', type: 'text', maxLength: 150, Icon: List },
 ]
+
+function validateForm(form) {
+  for (const name of ['name', 'email', 'subject', 'message']) {
+    const input = form.elements.namedItem(name)
+    input.setCustomValidity(input.value.trim() ? '' : 'Please fill out this field.')
+  }
+  return form.reportValidity()
+}
 
 export default function ContactForm() {
   const [status, setStatus] = useState('idle')
@@ -21,11 +29,7 @@ export default function ContactForm() {
     event.preventDefault()
     if (inFlight.current) return
     const form = event.currentTarget
-    for (const name of ['name', 'email', 'subject', 'message']) {
-      const input = form.elements.namedItem(name)
-      input.setCustomValidity(input.value.trim() ? '' : 'Please fill out this field.')
-    }
-    if (!form.reportValidity()) return
+    if (!validateForm(form)) return
     const fields = Object.fromEntries(new FormData(form))
     if (fields._honey) { setStatus('error'); return }
 
@@ -41,12 +45,26 @@ export default function ContactForm() {
       setStatus('success')
     } catch (error) {
       if (!form.isConnected) return
-      setStatus(error.message === 'DELIVERY_NOT_ACTIVATED' ? 'unavailable' : error.name === 'AbortError' ? 'timeout' : 'error')
+      setStatus(error.message === 'DELIVERY_NOT_ACTIVATED' ? 'unavailable' : error.message === 'RATE_LIMITED' ? 'rate-limited' : error.name === 'AbortError' ? 'timeout' : 'error')
     } finally {
       window.clearTimeout(timeout)
       request.current = null
       inFlight.current = false
     }
+  }
+
+  function handleVerifiedSubmit(event) {
+    const form = event.currentTarget.form
+    if (inFlight.current || !validateForm(form)) return
+    const fields = Object.fromEntries(new FormData(form))
+    if (fields._honey) return
+    for (const [name, value] of Object.entries(createContactPayload(fields))) {
+      const input = form.elements.namedItem(name)
+      if (input) input.value = value
+    }
+    // An explicit fallback lets visitors complete the provider's verification.
+    // Never automatically repeat an uncertain AJAX submission.
+    HTMLFormElement.prototype.submit.call(form)
   }
 
   return (
@@ -57,8 +75,12 @@ export default function ContactForm() {
         <Send size={30} strokeWidth={1.5} className="hidden shrink-0 -rotate-12 text-accent sm:block" aria-hidden="true" />
       </div>
 
-      <form action={`https://formsubmit.co/${contact.email}`} method="POST" onSubmit={handleSubmit} aria-busy={isSending} className="mt-5 lg:mt-3" onInput={event => { event.target.setCustomValidity?.(''); if (!inFlight.current && status !== 'idle') setStatus('idle') }}>
+      <form action={contactAction} method="POST" onSubmit={handleSubmit} aria-busy={isSending} className="mt-5 lg:mt-3" onInput={event => { event.target.setCustomValidity?.(''); if (!inFlight.current && status !== 'idle') setStatus('idle') }}>
         <input type="text" name="_honey" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+        <input type="hidden" name="_url" value={contactFormUrl} />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_subject" defaultValue="Portfolio inquiry" />
+        <input type="hidden" name="_replyto" defaultValue="" />
         <fieldset disabled={isSending} className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           <legend className="sr-only">Your contact details and message</legend>
           {fieldDefinitions.map(({ name, label, placeholder, type, autoComplete, maxLength, Icon }) => (
@@ -74,7 +96,10 @@ export default function ContactForm() {
         </fieldset>
 
         {status === 'success' && <p role="status" className="mt-4 flex items-start gap-2 rounded-xl bg-success-soft p-3 text-sm leading-6 text-success"><CheckCircle2 size={18} className="mt-0.5 shrink-0" aria-hidden="true" />Your message was submitted. Thank you for reaching out!</p>}
-        {['error', 'unavailable', 'timeout'].includes(status) && <p role="alert" className="mt-4 rounded-xl bg-error-soft p-3 text-sm leading-6 text-error">{status === 'unavailable' ? 'Email delivery is currently unavailable.' : status === 'timeout' ? 'The service took too long to confirm your submission. Your draft is still here.' : 'We couldn’t confirm your submission. Your draft is still here.'} Please try again later or <a href={`mailto:${contact.email}`} className="font-bold underline underline-offset-2">email me directly</a>.</p>}
+        {['error', 'unavailable', 'timeout', 'rate-limited'].includes(status) && <div role="alert" className="mt-4 rounded-xl bg-error-soft p-3 text-sm leading-6 text-error">
+          <p>{status === 'unavailable' ? 'Message delivery is waiting for email verification. Your draft is still here.' : status === 'rate-limited' ? 'Too many messages were sent recently. Please wait a little before trying again. Your draft is still here.' : status === 'timeout' ? 'The service took too long to confirm your submission. Your draft is still here.' : 'We couldn’t confirm your submission. Your draft is still here.'} You can <a href={`mailto:${contact.email}`} className="font-bold underline underline-offset-2">email me directly</a>.</p>
+          {status === 'error' && <button type="button" onClick={handleVerifiedSubmit} className="mt-2 font-bold underline underline-offset-2">Continue to secure submission <span className="font-normal">(opens a verification page)</span></button>}
+        </div>}
 
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between lg:mt-3">
           <button type="submit" disabled={isSending} className="button-primary w-full shrink-0 rounded-full px-5 py-3 text-sm disabled:cursor-wait disabled:opacity-70 disabled:hover:translate-y-0 sm:w-auto sm:text-sm">{isSending ? <LoaderCircle size={18} className="animate-spin motion-reduce:animate-none" aria-hidden="true" /> : <Send size={18} aria-hidden="true" />}{isSending ? 'Sending…' : 'Send Message'}{!isSending && <ArrowRight size={17} aria-hidden="true" />}</button>

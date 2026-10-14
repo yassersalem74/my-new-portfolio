@@ -24,13 +24,13 @@ export const technologies = [
 
 export const aboutHighlights = [
   { id: 'education', title: 'Computer Science', details: ['B.Sc. – Suez Canal University', '2018 – 2022'] },
-  { id: 'teaching', title: 'Technical Instructor', details: ['ITI – Teaching Assistant', 'and External Instructor'] },
+  { id: 'teaching', title: 'Technical Instructor', details: ['ITI – Teaching Assistant'] },
   { id: 'development', title: 'Front-End Developer', details: ['Modern Web Applications', '(React – Angular)'] },
-  { id: 'location', title: 'Based in', details: ['Port Said, Egypt', 'Available for Remote Work'] },
+  { id: 'approach', title: 'How I Work', details: ['Clean, reusable code', 'Clear user interfaces'] },
 ]
 
 export const aboutStats = [
   { value: '2+', label: 'Years Experience', detail: 'Development & Teaching' },
-  { value: '10+', label: 'Projects', detail: 'Web Applications' },
-  { value: '100+', label: 'Students Guided', detail: 'In Front-End & Full-Stack' },
+  { value: '10+', label: 'Real Projects', detail: 'Web Applications' },
+  { value: '100+', label: 'Students Guided', detail: 'In Front-End Development' },
 ]

@@ -1,6 +1,9 @@
 import contact from '../data/contact.json'
 
-export const contactEndpoint = `https://formsubmit.co/ajax/${contact.email}`
+const recipient = contact.formSubmitId || contact.email
+export const contactAction = `https://formsubmit.co/${recipient}`
+export const contactEndpoint = `https://formsubmit.co/ajax/${recipient}`
+export const contactFormUrl = contact.formUrl
 
 export function createContactPayload(fields) {
   return {
@@ -11,6 +14,7 @@ export function createContactPayload(fields) {
     _subject: `Portfolio inquiry: ${fields.subject.trim()}`,
     _replyto: fields.email.trim(),
     _template: 'table',
+    _url: contactFormUrl,
     _honey: fields._honey || '',
   }
 }
@@ -22,8 +26,11 @@ export async function submitContactMessage(fields, signal) {
     body: JSON.stringify(createContactPayload(fields)),
     signal,
   })
-  const result = await response.json()
+  if (response.status === 429) throw new Error('RATE_LIMITED')
+  const result = await response.json().catch(() => null)
+  if (!result || typeof result !== 'object') throw new Error('SUBMISSION_FAILED')
+  // Activation can be returned with success:false; classify it before delivery.
+  if (/activat|(?:confirm|verify|verification)\s+(?:your\s+|the\s+)?(?:email|form)|(?:email|form)\s+(?:confirmation|verification)/i.test(result.message || '')) throw new Error('DELIVERY_NOT_ACTIVATED')
   if (!response.ok || !(result.success === true || result.success === 'true')) throw new Error('SUBMISSION_FAILED')
-  if (/activat|verif|confirm|check (?:your|the) email/i.test(result.message || '')) throw new Error('DELIVERY_NOT_ACTIVATED')
   return result
 }

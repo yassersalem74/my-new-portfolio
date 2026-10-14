@@ -63,7 +63,7 @@ Profile assets and navigation can be updated in `src/data/portfolio.js`. The hom
 
 ## Static hosting
 
-Configure your host to serve `index.html` for unmatched application paths so direct visits and refreshes at routes like `/about` work. Vite handles this during development and preview.
+The included `vercel.json` rewrites application paths to `index.html`, so direct visits and refreshes at `/contact`, `/about`, and project detail pages work on Vercel. Other static hosts need an equivalent SPA fallback. Vite handles this during development and preview.
 
 Typography uses Google Fonts with system font fallbacks.
 
@@ -81,17 +81,17 @@ Edit `src/data/experience.json` to update education, internships, or work roles.
 
 An optional `logo` object with `src`, `alt`, `width`, and `height` displays an organization logo in the card header. ITI entries use `public/iti-logo.png`, and X-Motion uses `public/xmotion_sa_logo.jfif`.
 
-The timeline alternates cards around a central line on desktop. On smaller screens it uses a single column with a line on the left and dates inside each card. The dates and responsibilities follow the supplied résumé.
+Phase cards separate Education, Internships, and Work Experience. Work Experience is shown first; selecting another phase displays its own timeline. The selectors support arrow keys, Home, and End. Each timeline uses one readable column with dates beside the role on larger screens and beneath it on smaller screens. The dates, company logos, and responsibilities follow the supplied résumé.
 
 ## Contact form
 
 Contact links are in `src/data/contact.json`. LinkedIn, GitHub, WhatsApp, and Email appear together beside the portrait on desktop, with the message form spanning the full content width underneath. The desktop portrait is capped at 360px, and compact cards and a three-column field row reduce vertical scrolling. On smaller screens, the content stacks in one column. LinkedIn, GitHub, and WhatsApp use local SVG images in `public/social/`; Email uses an icon that follows the theme and opens a `mailto:` link.
 
-The form sends a real POST request to the [FormSubmit AJAX endpoint](https://formsubmit.co/ajax-documentation) for `yassersalem9099@gmail.com`. There are no API keys or private SMTP credentials in the client. The sender's email is included as Reply-To, and the subject identifies the portfolio inquiry.
+The form sends a POST request to the [FormSubmit AJAX endpoint](https://formsubmit.co/ajax-documentation) using the deployed form's permanent ID from its confirmation email. Set `formSubmitId` in `src/data/contact.json` to the ID only, not the `/confirm/` activation token. A missing ID uses `email` as the recipient. `formUrl` supplies the canonical deployed Contact URL as `_url`, so the same form source is used consistently. There are no private SMTP credentials in the client. The sender's email is included as Reply-To, and the subject identifies the portfolio inquiry.
 
-**Email activation is complete:** the owner confirmed receiving and activating FormSubmit's confirmation email for `yassersalem9099@gmail.com` during setup. If the recipient is changed or FormSubmit requests activation again, submit once, then open its confirmation email and click the activation link. Check the spam folder too. Confirm a normal inquiry arrives before sharing a new form. See [FormSubmit setup](https://formsubmit.co/).
+**The deployed form is active:** FormSubmit confirmed activation for `https://yasser-salem-portfolio.vercel.app/` using the owner's supplied confirmation link. One approved test was submitted from the production Contact page, the service returned success, and the owner confirmed inbox receipt. Changing its recipient or website may require activating that form again. Future provider acceptance does not independently prove inbox receipt. See [FormSubmit setup](https://formsubmit.co/).
 
-The form validates required fields and email addresses, prevents duplicate requests while sending, includes a honeypot field, and times out after 45 seconds. It clears the draft only after the service reports success. Errors retain the draft and offer a direct email link. A timeout reports that confirmation was unavailable, since a delayed response does not prove the submission failed. A successful response indicates the service accepted the submission; it cannot independently prove inbox receipt.
+The form validates required fields and email addresses, prevents duplicate requests while sending, includes a honeypot field, and times out after 45 seconds. It clears the draft only after the service reports success. Activation responses (including `success:false`), invalid responses, rate limits, and timeouts retain the draft and offer a direct email link. A failed AJAX request also offers an explicit traditional submission with the provider's verification page. It never automatically resends an uncertain submission. A timeout reports that confirmation was unavailable, since a delayed response does not prove the submission failed.
 
 ## Project gallery
 
@@ -126,7 +126,7 @@ Edit `src/data/projects.json` to add projects or update their details. Each entr
 
 Put screenshots in `public/projects/` and use paths beginning with `/projects/`. An optional `mobileImage` adds the phone preview over the desktop screenshot. When `image` is `null` or cannot load, a cover illustration is shown. **Other Projects** opens `https://github.com/yassersalem74` in a new tab. Alaa Eldien’s site currently redirects to its login page; its captured previews reflect that public entry point. A missing or invalid URL shows a coming-soon page inside the viewer.
 
-Set `featured` to `false` to list a project only after clicking **View All Projects**. Cover styles are `dessert`, `studio`, `industry`, `platform`, `custom`, `collection`, and `github`.
+Set `featured` to `false` to omit a project from the portfolio gallery. **View All Projects** opens the configured GitHub profile in a new tab. Cover styles are `dessert`, `studio`, `industry`, `platform`, `custom`, `collection`, and `github`.
 
 Project cards open their own description pages at `/projects/:projectId`. Click the main screenshot or the **Live Demo** button beside the project title to open the modal iframe, with desktop/tablet/mobile sizes, reload, close, and Escape support. Both controls support keyboard activation. Screenshot thumbnails change the main preview. Add more `gallery` entries for additional pages or sections; use `type: "mobile"` for a tall screenshot that should fit inside the preview. When `gallery` is omitted, the desktop and mobile image fields are used. Optional `client` and `year` fields in `details` appear when supplied.
 

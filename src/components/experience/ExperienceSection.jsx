@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import timeline from '../../data/experience.json'
 import ResumeButton from '../ui/ResumeButton'
+import ExperiencePhases from './ExperiencePhases'
 import TimelineGroup from './TimelineGroup'
 
 export default function ExperienceSection() {
+  const [activePhase, setActivePhase] = useState('work-experience')
   return (
     <section aria-labelledby="experience-heading" className="relative isolate overflow-hidden bg-gradient-to-br from-canvas via-canvas to-glow/45">
       <div aria-hidden="true" className="pointer-events-none absolute top-20 right-[8%] h-32 w-40 opacity-40 [background-image:radial-gradient(var(--color-dot)_1.5px,transparent_1.5px)] [background-size:16px_16px]" />
@@ -16,8 +19,13 @@ export default function ExperienceSection() {
           <ResumeButton className="relative z-10 w-full shrink-0 self-start sm:w-auto sm:self-center sm:px-5 sm:text-sm" />
         </header>
 
-        <div className="mx-auto mt-10 max-w-[1100px] space-y-10 sm:mt-12 sm:space-y-12 lg:mt-14">
-          {timeline.map(group => <TimelineGroup key={group.id} group={group} />)}
+        <div className="mx-auto mt-8 max-w-[1100px] sm:mt-10">
+          <ExperiencePhases phases={timeline} activePhase={activePhase} onChange={setActivePhase} />
+          {timeline.map((group, index) => (
+            <div key={group.id} role="tabpanel" id={`experience-panel-${group.id}`} aria-labelledby={`experience-tab-${group.id}`} tabIndex={0} hidden={activePhase !== group.id} className="mt-5 rounded-3xl sm:mt-6 sm:border sm:border-border sm:bg-surface/55 sm:p-6 sm:shadow-card lg:p-8">
+              <TimelineGroup group={group} phaseNumber={index + 1} />
+            </div>
+          ))}
         </div>
       </div>
     </section>

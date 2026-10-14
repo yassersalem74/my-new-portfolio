@@ -1,11 +1,11 @@
-import { CodeXml, GraduationCap, MapPin, UsersRound } from 'lucide-react'
+import { CodeXml, GraduationCap, Layers3, UsersRound } from 'lucide-react'
 import { aboutHighlights } from '../../data/portfolio'
 
 const icons = {
   education: GraduationCap,
   teaching: UsersRound,
   development: CodeXml,
-  location: MapPin,
+  approach: Layers3,
 }
 
 export default function AboutHighlights() {
@@ -21,7 +21,7 @@ export default function AboutHighlights() {
             <div className="min-w-0">
               <h2 className="text-sm leading-snug font-extrabold tracking-[-0.025em] sm:text-[15px] lg:text-xs xl:text-[13px]">{title}</h2>
               <p className="mt-1 text-xs leading-[1.5] text-muted sm:text-[13px] lg:text-[11px] lg:[@media(max-height:680px)]:mt-0.5 lg:[@media(max-height:680px)]:text-[10px] lg:[@media(max-height:680px)]:leading-[1.4]">
-                {details[0]}<br />{details[1]}
+                {details.map(detail => <span key={detail} className="block">{detail}</span>)}
               </p>
             </div>
           </li>
