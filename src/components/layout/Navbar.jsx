@@ -24,7 +24,7 @@ export default function Navbar() {
   }, [isOpen])
 
   return (
-    <header className="relative z-30">
+    <header className="sticky top-0 z-30 bg-canvas/90 backdrop-blur-xl">
       <div className="page-container flex h-24 items-center justify-between gap-8 lg:h-20">
         <div className="flex items-center gap-10 xl:gap-16">
           <Logo />
