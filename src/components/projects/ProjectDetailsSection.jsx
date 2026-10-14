@@ -4,6 +4,7 @@ import { Link } from 'react-router'
 import ProjectGallery from './ProjectGallery'
 import ProjectScreenshot from './ProjectScreenshot'
 import ProjectViewer from './ProjectViewer'
+import MotionAtmosphere from '../ui/MotionAtmosphere'
 
 const detailFields = [
   { key: 'client', label: 'Client', Icon: Building2 },
@@ -30,7 +31,8 @@ export default function ProjectDetailsSection({ project }) {
   }
 
   return (
-    <section aria-labelledby="project-detail-heading" className="relative bg-radial-[at_top_right] from-glow/40 via-canvas to-surface">
+    <section aria-labelledby="project-detail-heading" className="relative isolate bg-radial-[at_top_right] from-glow/40 via-canvas to-surface">
+      <MotionAtmosphere scene="projects" />
       <div className="page-container py-6 sm:py-8 lg:py-7">
         <div className="mx-auto max-w-[1180px]">
           <nav aria-label="Breadcrumb" className="mb-4 flex items-center gap-2 text-xs font-medium text-muted">
@@ -39,7 +41,7 @@ export default function ProjectDetailsSection({ project }) {
             <span aria-current="page">{project.title}</span>
           </nav>
           <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center sm:gap-6">
-            <h1 id="project-detail-heading" className="min-w-0 text-2xl leading-tight font-extrabold tracking-[-0.045em] sm:flex-1 sm:text-3xl lg:text-[34px]">
+            <h1 id="project-detail-heading" data-reveal="soft" className="min-w-0 text-2xl leading-tight font-extrabold tracking-[-0.045em] sm:flex-1 sm:text-3xl lg:text-[34px]">
               {project.title} <span aria-hidden="true" className="text-primary">–</span> {project.description}
             </h1>
             <button type="button" aria-haspopup="dialog" onClick={() => setShowViewer(true)} className="button-primary w-full shrink-0 rounded-xl px-5 py-3 text-sm sm:w-auto sm:text-sm">
@@ -47,8 +49,8 @@ export default function ProjectDetailsSection({ project }) {
             </button>
           </div>
 
-          <figure id="project-main-screenshot" aria-label="Selected project screenshot" className="mt-5 scroll-mt-5">
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-surface-soft shadow-card transition-shadow hover:shadow-card-hover sm:aspect-[2.1] lg:aspect-[2.45]">
+          <figure id="project-main-screenshot" data-reveal="zoom" data-reveal-delay="120" aria-label="Selected project screenshot" className="mt-5 scroll-mt-5">
+            <div data-glass data-tilt className="relative aspect-video overflow-hidden rounded-2xl border border-border bg-surface-soft shadow-card transition-shadow hover:shadow-card-hover sm:aspect-[2.1] lg:aspect-[2.45]">
               <ProjectScreenshot project={project} screenshot={selectedScreenshot} showPhone />
               <button type="button" aria-label={`Open ${project.title} live preview`} title={`Open ${project.title} live preview`} aria-haspopup="dialog" onClick={() => setShowViewer(true)} className="absolute inset-0 z-10 rounded-[inherit] bg-transparent focus-visible:outline-offset-[-3px]" />
             </div>
@@ -57,7 +59,7 @@ export default function ProjectDetailsSection({ project }) {
 
           <div className="mt-6 grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
             <div>
-              <section aria-labelledby="project-overview-heading">
+              <section aria-labelledby="project-overview-heading" data-reveal="rise">
                 <h2 id="project-overview-heading" className="text-lg font-extrabold">Project Overview</h2>
                 <p className="mt-3 max-w-prose text-sm leading-7 text-muted">{project.overview || project.description}</p>
                 <ul aria-label="Project technologies" className="mt-4 flex flex-wrap gap-2">
@@ -65,7 +67,7 @@ export default function ProjectDetailsSection({ project }) {
                 </ul>
               </section>
               {project.features?.length > 0 && (
-                <section aria-labelledby="project-features-heading" className="mt-7">
+                <section aria-labelledby="project-features-heading" data-reveal="rise" className="mt-7">
                   <h2 id="project-features-heading" className="text-lg font-extrabold">Key Features</h2>
                   <ul className="mt-4 space-y-3">
                     {project.features.map(feature => <li key={feature} className="flex items-start gap-3 text-sm leading-6 text-muted"><span className="mt-1 flex size-4 shrink-0 items-center justify-center rounded-md bg-primary/10 text-accent"><Check size={11} strokeWidth={3} aria-hidden="true" /></span>{feature}</li>)}
@@ -75,7 +77,7 @@ export default function ProjectDetailsSection({ project }) {
             </div>
             <div>
               {details.length > 0 && (
-                <section aria-labelledby="project-details-heading">
+                <section aria-labelledby="project-details-heading" data-reveal="slide" data-reveal-delay="100">
                   <h2 id="project-details-heading" className="text-lg font-extrabold">Project Details</h2>
                   <dl className="mt-4 space-y-4">
                     {details.map(({ key, label, Icon }) => <div key={key} className="flex items-start gap-3 text-sm"><Icon size={17} className="mt-0.5 shrink-0 text-accent" aria-hidden="true" /><dt className="w-16 shrink-0 font-bold">{label}</dt><dd className="min-w-0 leading-6 text-muted">{project.details[key]}</dd></div>)}

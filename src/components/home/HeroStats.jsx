@@ -1,8 +1,9 @@
 import { BookOpen, CodeXml, GraduationCap, UsersRound } from 'lucide-react'
+import AnimatedNumber from '../ui/AnimatedNumber'
 
 const stats = [
   { Icon: GraduationCap, value: '2+', label: 'Years Experience', detail: 'Development & Teaching' },
-  { Icon: CodeXml, value: '10+', label: 'Projects', detail: 'Web Applications' },
+  { Icon: CodeXml, value: '10+', label: 'Real Projects', detail: 'Web Applications' },
   { Icon: UsersRound, value: '100+', label: 'Students Guided', detail: 'In Front-End & Full-Stack' },
   { Icon: BookOpen, value: 'ITI', label: 'Technical Instructor', detail: 'Front-End Training' },
 ]
@@ -10,12 +11,12 @@ const stats = [
 export default function HeroStats() {
   return (
     <dl className="mt-10 grid grid-cols-2 gap-x-6 gap-y-7 sm:mt-12 sm:grid-cols-4 sm:gap-x-0 lg:mt-6">
-      {stats.map(({ Icon, value, label, detail }) => (
-        <div key={label} className="relative sm:px-4 sm:first:pl-0 sm:last:pr-0 sm:not-first:before:absolute sm:not-first:before:top-4 sm:not-first:before:bottom-0 sm:not-first:before:left-0 sm:not-first:before:w-px sm:not-first:before:bg-border lg:px-3 xl:px-4">
+      {stats.map(({ Icon, value, label, detail }, index) => (
+        <div key={label} data-reveal="rise" data-reveal-delay={260 + index * 70} className="relative sm:px-4 sm:first:pl-0 sm:last:pr-0 sm:not-first:before:absolute sm:not-first:before:top-4 sm:not-first:before:bottom-0 sm:not-first:before:left-0 sm:not-first:before:w-px sm:not-first:before:bg-border lg:px-3 xl:px-4">
           <span className="mb-3 flex size-9 items-center justify-center rounded-full bg-surface-soft text-accent lg:mb-2 lg:size-8">
             <Icon size={27} className="lg:size-6" strokeWidth={1.8} aria-hidden="true" />
           </span>
-          <dd className="text-3xl font-extrabold tracking-tight lg:text-[28px]">{value}</dd>
+          <dd className="text-3xl font-extrabold tracking-tight lg:text-[28px]"><AnimatedNumber value={value} /></dd>
           <dt className="mt-1 text-xs leading-relaxed font-medium text-muted lg:text-[11px]">{label}</dt>
           <dd className="mt-1 text-[10px] leading-relaxed text-muted">{detail}</dd>
         </div>

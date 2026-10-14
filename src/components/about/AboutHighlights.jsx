@@ -11,10 +11,10 @@ const icons = {
 export default function AboutHighlights() {
   return (
     <ul aria-label="About me at a glance" className="mt-6 grid gap-3 min-[480px]:grid-cols-2 sm:gap-4 lg:mt-4 lg:gap-2.5 lg:[@media(max-height:680px)]:mt-3 lg:[@media(max-height:680px)]:gap-2">
-      {aboutHighlights.map(({ id, title, details }) => {
+      {aboutHighlights.map(({ id, title, details }, index) => {
         const Icon = icons[id]
         return (
-          <li key={id} className="flex items-center gap-4 rounded-[22px] border border-border bg-surface/85 p-4 shadow-card backdrop-blur-sm sm:p-5 lg:gap-3 lg:p-3 lg:[@media(max-height:680px)]:p-2">
+          <li key={id} data-glass data-reveal="slide" data-reveal-delay={index * 80} className="relative flex items-center gap-4 rounded-[22px] border border-border bg-surface/85 p-4 shadow-card backdrop-blur-sm sm:p-5 lg:gap-3 lg:p-3 lg:[@media(max-height:680px)]:p-2">
             <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-surface-soft text-accent sm:size-14 lg:size-10 lg:[@media(max-height:680px)]:size-8">
               <Icon className="size-7 sm:size-8 lg:size-6" strokeWidth={1.7} aria-hidden="true" />
             </span>

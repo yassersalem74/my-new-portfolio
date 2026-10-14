@@ -2,7 +2,7 @@ import SkillIcon from './SkillIcon'
 
 export default function SkillTile({ skill, index = 0 }) {
   return (
-    <li className="relative flex min-w-0 flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-surface-alt/90 px-2 py-3 text-center shadow-card sm:py-4 lg:min-h-[86px] lg:gap-2 lg:px-1.5 lg:py-2.5 lg:[@media(max-height:680px)]:min-h-[72px] lg:[@media(max-height:680px)]:gap-1.5 lg:[@media(max-height:680px)]:py-2">
+    <li data-reveal="zoom" data-reveal-delay={index * 55} style={{ '--skill-glow': skill.color ?? 'var(--brand-primary)' }} className="motion-skill relative flex min-w-0 flex-col items-center justify-center gap-2 rounded-2xl border border-border bg-surface-alt/90 px-2 py-3 text-center shadow-card sm:py-4 lg:min-h-[86px] lg:gap-2 lg:px-1.5 lg:py-2.5 lg:[@media(max-height:680px)]:min-h-[72px] lg:[@media(max-height:680px)]:gap-1.5 lg:[@media(max-height:680px)]:py-2">
       <svg aria-hidden="true" focusable="false" className="pointer-events-none absolute inset-0 size-full" style={{ color: ['next', 'github'].includes(skill.id) ? 'var(--color-ink)' : skill.color ?? 'var(--color-primary)' }}>
         <rect
           x="1"

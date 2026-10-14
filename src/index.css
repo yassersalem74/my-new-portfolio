@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./styles/motion.css";
 
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
@@ -142,6 +143,165 @@
   @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-2xl border-2 border-border bg-surface/60 px-6 py-3.5 text-sm font-bold text-ink transition duration-200 hover:-translate-y-0.5 hover:border-accent hover:bg-surface motion-reduce:transform-none sm:text-base;
 }
 
+.navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  flex-shrink: 0;
+  width: 128px;
+  height: 64px;
+  border-radius: 8px;
+}
+
+.navbar-logo-avatar {
+  position: relative;
+  isolation: isolate;
+  flex-shrink: 0;
+  width: 34px;
+  height: 48px;
+  transition: transform 350ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.navbar-logo-avatar::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 10% -25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--brand-primary) 22%, transparent), transparent 70%);
+  filter: blur(5px);
+  opacity: 0.5;
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.navbar-logo-reflection {
+  animation: navbar-portrait-reflection 8s ease-in-out infinite;
+}
+
+.navbar-logo-divider {
+  flex-shrink: 0;
+  width: 1px;
+  height: 30px;
+  background: linear-gradient(transparent, color-mix(in srgb, var(--brand-primary) 50%, transparent), transparent);
+  transition: transform 350ms ease;
+}
+
+.navbar-logo-name {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  font-size: 17px;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+.navbar-logo-word {
+  --logo-word-color: var(--theme-ink);
+  --logo-reflection-color: var(--theme-accent);
+  color: var(--logo-word-color);
+  white-space: nowrap;
+}
+
+.navbar-logo-word--accent {
+  --logo-word-color: var(--theme-accent);
+  --logo-reflection-color: var(--theme-ink);
+}
+
+@supports (background-clip: text) {
+  .navbar-logo-word {
+    background: linear-gradient(110deg, var(--logo-word-color) 40%, var(--logo-reflection-color) 48%, var(--logo-word-color) 56%);
+    background-size: 260% 100%;
+    background-position: 140% 50%;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: navbar-name-reflection 8s ease-in-out infinite;
+  }
+
+  .navbar-logo-word--accent {
+    animation-delay: 140ms;
+  }
+}
+
+.navbar-logo:focus-visible .navbar-logo-avatar {
+  transform: translateY(-1px) rotate(-3deg);
+}
+
+.navbar-logo:focus-visible .navbar-logo-avatar::before {
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.navbar-logo:focus-visible .navbar-logo-divider {
+  transform: scaleY(1.2);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .navbar-logo:hover .navbar-logo-avatar {
+    transform: translateY(-1px) rotate(-3deg);
+  }
+
+  .navbar-logo:hover .navbar-logo-avatar::before {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+  .navbar-logo:hover .navbar-logo-divider {
+    transform: scaleY(1.2);
+  }
+}
+
+@media (min-width: 640px) {
+  .navbar-logo {
+    width: 148px;
+    height: 72px;
+    gap: 10px;
+  }
+
+  .navbar-logo-avatar {
+    width: 40px;
+    height: 54px;
+  }
+
+  .navbar-logo-name {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navbar-logo {
+    width: 144px;
+    height: 70px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navbar-logo {
+    width: 160px;
+    height: 72px;
+  }
+
+  .navbar-logo-avatar {
+    width: 44px;
+    height: 58px;
+  }
+
+  .navbar-logo-name {
+    font-size: 20px;
+  }
+}
+
+@keyframes navbar-portrait-reflection {
+  0%, 12% { transform: translateX(-600px); }
+  38%, 100% { transform: translateX(950px); }
+}
+
+@keyframes navbar-name-reflection {
+  0%, 12% { background-position: 140% 50%; }
+  38%, 100% { background-position: -140% 50%; }
+}
+
 .logo-loader {
   position: fixed;
   inset: 0;
@@ -174,18 +334,14 @@
   animation: logo-glow 2s ease-in-out infinite alternate;
 }
 
-.logo-loader-glyph {
-  font-family: var(--font-sans);
-  font-size: 132px;
-  font-weight: 800;
-  letter-spacing: -26px;
+.logo-loader-portrait {
+  transform-origin: 120px 120px;
+  animation: logo-portrait-float 2.8s ease-in-out infinite;
 }
 
-.logo-loader-outline {
-  fill: color-mix(in srgb, var(--brand-primary) 3%, transparent);
-  stroke: var(--brand-primary);
-  stroke-width: 1px;
-  stroke-opacity: 0.45;
+.logo-loader-ghost {
+  filter: grayscale(1);
+  opacity: 0.16;
 }
 
 .logo-loader-track,
@@ -222,18 +378,17 @@
 }
 
 .logo-loader-liquid {
-  transform: translateY(185px);
-  animation: logo-liquid-rise 1.4s cubic-bezier(0.45, 0, 0.2, 1) forwards;
+  transform: translateY(224px);
+  animation: logo-liquid-rise 1.35s cubic-bezier(0.45, 0, 0.2, 1) forwards;
   transition: transform 280ms ease;
 }
 
-.logo-loader-wave {
-  animation: logo-wave 1.2s linear infinite;
+.logo-loader-scan {
+  animation: logo-scan-rise 1.35s cubic-bezier(0.45, 0, 0.2, 1) both;
 }
 
-.logo-loader-wave--back {
-  animation-direction: reverse;
-  animation-duration: 1.8s;
+.logo-loader-polish {
+  animation: logo-polish 2.6s ease-in-out 850ms infinite;
 }
 
 .logo-loader-dots {
@@ -255,7 +410,12 @@
 
 .logo-loader--complete .logo-loader-liquid {
   animation: none;
-  transform: translateY(42px);
+  transform: translateY(12px);
+}
+
+.logo-loader--complete .logo-loader-scan {
+  animation: none;
+  opacity: 0;
 }
 
 .logo-loader--exiting {
@@ -265,58 +425,6 @@
 .logo-loader--exiting .logo-loader-content {
   animation: none;
   transform: scale(1.04);
-}
-
-/* Keep the navbar mark filled, with a gentle wave and a slower orbit. */
-.logo-mark--compact {
-  width: 64px;
-}
-
-.logo-mark--compact::before {
-  animation: none;
-  filter: blur(8px);
-  opacity: 0.65;
-}
-
-.logo-mark--compact .logo-loader-liquid {
-  animation: none;
-  transform: translateY(78px);
-}
-
-.logo-mark--compact .logo-loader-orbit {
-  animation-duration: 14s;
-}
-
-.logo-mark--compact .logo-loader-wave {
-  animation-duration: 3s;
-}
-
-.logo-mark--compact .logo-loader-wave--back {
-  animation-duration: 4.5s;
-}
-
-.logo-mark--compact .logo-loader-track {
-  stroke-width: 2px;
-  stroke-opacity: 0.25;
-}
-
-.logo-mark--compact .logo-loader-ticks {
-  stroke-width: 3px;
-  stroke-opacity: 0.3;
-}
-
-.logo-mark--compact .logo-loader-arcs {
-  stroke-width: 4px;
-}
-
-.logo-mark--compact .logo-loader-outline {
-  stroke-width: 2px;
-}
-
-@media (min-width: 640px) {
-  .logo-mark--compact {
-    width: 68px;
-  }
 }
 
 @keyframes logo-arrive {
@@ -334,12 +442,26 @@
 }
 
 @keyframes logo-liquid-rise {
-  from { transform: translateY(185px); }
-  to { transform: translateY(78px); }
+  from { transform: translateY(224px); }
+  to { transform: translate(-120px, 12px); }
 }
 
-@keyframes logo-wave {
-  to { transform: translateX(-120px); }
+@keyframes logo-portrait-float {
+  0%, 100% { transform: translateY(2px) rotate(-1deg); }
+  50% { transform: translateY(-2px) rotate(1deg); }
+}
+
+@keyframes logo-scan-rise {
+  0% { transform: translateY(224px); opacity: 0; }
+  12% { opacity: 1; }
+  85% { opacity: 0.8; }
+  100% { transform: translateY(12px); opacity: 0; }
+}
+
+@keyframes logo-polish {
+  0% { transform: translateX(-40px); opacity: 0; }
+  10% { opacity: 1; }
+  45%, 100% { transform: translateX(280px); opacity: 0; }
 }
 
 @keyframes logo-dot {
@@ -348,19 +470,37 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .navbar-logo,
+  .navbar-logo *,
+  .navbar-logo-avatar::before,
   .logo-loader,
   .logo-loader *,
   .logo-loader-dots i,
-  .logo-loader-stage::before,
-  .logo-mark--compact *,
-  .logo-mark--compact::before {
+  .logo-loader-stage::before {
     animation: none;
     transition: none;
   }
 
-  .logo-loader-liquid,
-  .logo-mark--compact .logo-loader-liquid {
-    transform: translateY(42px);
+  .navbar-logo:is(:hover, :focus-visible) .navbar-logo-avatar,
+  .navbar-logo:is(:hover, :focus-visible) .navbar-logo-avatar::before,
+  .navbar-logo:is(:hover, :focus-visible) .navbar-logo-divider,
+  .logo-loader-portrait {
+    transform: none;
+  }
+
+  .logo-loader-liquid {
+    transform: translateY(12px);
+  }
+
+  .logo-loader-scan,
+  .logo-loader-polish,
+  .navbar-logo-reflection {
+    display: none;
+  }
+
+  .navbar-logo-word {
+    background: none;
+    -webkit-text-fill-color: currentColor;
   }
 
   .logo-loader--exiting .logo-loader-content {

@@ -6,7 +6,7 @@ export default function AboutVisual() {
   const clipId = useId().replaceAll(':', '')
 
   return (
-    <div className="relative mx-auto mt-6 aspect-[6/5] w-[calc(100%-3rem)] max-w-[720px] overflow-hidden rounded-[32px] sm:mt-8 sm:w-[calc(100%-5rem)] sm:rounded-[48px] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:aspect-auto lg:h-full lg:w-[66%] lg:max-w-none lg:overflow-visible lg:rounded-none">
+    <div data-reveal="zoom" className="motion-portrait relative mx-auto mt-6 aspect-[6/5] w-[calc(100%-3rem)] max-w-[720px] overflow-hidden rounded-[32px] sm:mt-8 sm:w-[calc(100%-5rem)] sm:rounded-[48px] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:aspect-auto lg:h-full lg:w-[66%] lg:max-w-none lg:overflow-visible lg:rounded-none">
       <svg width="0" height="0" aria-hidden="true" className="absolute">
         <defs>
           <clipPath id={clipId} clipPathUnits="objectBoundingBox">
@@ -24,7 +24,7 @@ export default function AboutVisual() {
         </div>
         <div aria-hidden="true" className="pointer-events-none absolute top-[7%] right-6 hidden flex-col gap-3 xl:flex 2xl:right-8">
           {[CodeXml, PanelsTopLeft, UsersRound, ChartNoAxesColumnIncreasing].map((Icon, index) => (
-            <span key={index} className="flex size-14 items-center justify-center rounded-2xl border border-border bg-surface/90 text-accent shadow-card backdrop-blur-md">
+            <span key={index} data-glass style={{ '--float-delay': `${index * -1.2}s` }} className="motion-float relative flex size-14 items-center justify-center rounded-2xl border border-border bg-surface/90 text-accent shadow-card backdrop-blur-md">
               <Icon size={28} strokeWidth={1.7} />
             </span>
           ))}

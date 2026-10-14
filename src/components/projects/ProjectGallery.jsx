@@ -5,17 +5,18 @@ export default function ProjectGallery({ project, screenshots, selectedIndex, on
   if (screenshots.length < 2) return null
 
   return (
-    <section aria-labelledby="project-screenshots-heading" className="mt-7">
+    <section aria-labelledby="project-screenshots-heading" data-reveal="rise" className="mt-7">
       <h2 id="project-screenshots-heading" className="mb-3 text-base font-extrabold">Project Screenshots</h2>
       <div className="grid grid-cols-2 gap-3">
         {screenshots.map((screenshot, index) => (
           <button
             key={screenshot.src}
+            data-glass
             type="button"
             onClick={() => onSelect(index)}
             aria-label={`Show ${screenshot.label} screenshot`}
             aria-pressed={selectedIndex === index}
-            className={`group overflow-hidden rounded-xl border bg-surface text-left transition-colors ${selectedIndex === index ? 'border-primary shadow-primary' : 'border-border hover:border-primary/40'}`}
+            className={`group relative overflow-hidden rounded-xl border bg-surface text-left transition-colors ${selectedIndex === index ? 'border-primary shadow-primary' : 'border-border hover:border-primary/40'}`}
           >
             <span className="relative block aspect-[1.7] overflow-hidden">
               <ProjectScreenshot project={project} screenshot={screenshot} />

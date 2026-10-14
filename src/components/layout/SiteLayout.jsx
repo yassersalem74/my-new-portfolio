@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router'
 import { navigation } from '../../data/portfolio'
 import projects from '../../data/projects.json'
 import Navbar from './Navbar'
+import MotionPage from './MotionPage'
 
 export default function SiteLayout() {
   const { pathname } = useLocation()
@@ -25,7 +26,7 @@ export default function SiteLayout() {
       <a href="#main-content" className="sr-only fixed top-3 left-3 z-50 rounded-xl bg-primary px-5 py-3 text-on-primary focus:not-sr-only">Skip to content</a>
       <Navbar />
       <main id="main-content" ref={content} tabIndex={-1} className="outline-none">
-        <Outlet />
+        <MotionPage key={pathname} scene={pathname === '/' ? 'home' : pathname.split('/')[1]}><Outlet /></MotionPage>
       </main>
     </div>
   )

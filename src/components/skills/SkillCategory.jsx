@@ -9,11 +9,11 @@ const categoryIcons = {
   teaching: UsersRound,
 }
 
-export default function SkillCategory({ category }) {
+export default function SkillCategory({ category, index = 0 }) {
   const Icon = categoryIcons[category.id]
   const isWide = category.skills.length === 5
   return (
-    <article aria-labelledby={`skills-${category.id}`} className={`flex flex-col rounded-[22px] border border-border bg-surface/90 p-4 shadow-card backdrop-blur-md sm:p-5 lg:p-3.5 xl:p-4 lg:[@media(max-height:680px)]:p-3 ${isWide ? 'lg:col-span-3' : 'lg:col-span-2'} ${category.id === 'teaching' ? 'md:col-span-2 lg:col-span-3' : ''}`}>
+    <article aria-labelledby={`skills-${category.id}`} data-glass data-reveal="rise" data-reveal-delay={index * 80} className={`relative flex flex-col rounded-[22px] border border-border bg-surface/90 p-4 shadow-card backdrop-blur-md sm:p-5 lg:p-3.5 xl:p-4 lg:[@media(max-height:680px)]:p-3 ${isWide ? 'lg:col-span-3' : 'lg:col-span-2'} ${category.id === 'teaching' ? 'md:col-span-2 lg:col-span-3' : ''}`}>
       <div className="mb-3 flex items-center gap-3 sm:gap-4 lg:mb-2.5 lg:gap-2.5 lg:[@media(max-height:680px)]:mb-2">
         <span className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-surface-soft text-accent sm:size-14 lg:size-10 lg:rounded-xl lg:[@media(max-height:680px)]:size-9">
           <Icon className="size-7 sm:size-8 lg:size-6" strokeWidth={1.7} aria-hidden="true" />

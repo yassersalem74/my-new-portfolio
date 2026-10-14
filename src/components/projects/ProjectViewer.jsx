@@ -44,7 +44,7 @@ export default function ProjectViewer({ project, onClose }) {
   }
 
   return (
-    <dialog ref={dialog} aria-labelledby="project-viewer-title" onCancel={event => { event.preventDefault(); onClose() }} onClick={closeOnBackdrop} className="fixed inset-0 m-auto h-[calc(100svh-16px)] max-h-[1000px] w-[calc(100%-16px)] max-w-[1680px] overflow-hidden rounded-2xl border border-border bg-canvas p-0 text-ink shadow-2xl backdrop:bg-device/70 backdrop:backdrop-blur-sm sm:h-[92svh] sm:w-[94vw] sm:rounded-3xl">
+    <dialog ref={dialog} aria-labelledby="project-viewer-title" onCancel={event => { event.preventDefault(); onClose() }} onClick={closeOnBackdrop} className="motion-dialog fixed inset-0 m-auto h-[calc(100svh-16px)] max-h-[1000px] w-[calc(100%-16px)] max-w-[1680px] overflow-hidden rounded-2xl border border-border bg-canvas p-0 text-ink shadow-2xl backdrop:bg-device/70 backdrop:backdrop-blur-sm sm:h-[92svh] sm:w-[94vw] sm:rounded-3xl">
       <div className="flex h-full flex-col">
         <header className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-border bg-surface px-3 py-3 sm:flex-nowrap sm:px-5">
           <div className="min-w-0 flex-1"><p className="text-[9px] font-bold tracking-[0.16em] text-accent uppercase">Project Preview</p><h2 id="project-viewer-title" className="truncate text-sm font-bold sm:text-lg">{project.title}</h2></div>

@@ -55,7 +55,9 @@ public/
 
 Every navigation item opens a separate page. The shared navbar highlights the current route and collapses into a keyboard-accessible mobile menu.
 
-A YS outline fills with an orange gradient and moving liquid waves, surrounded by orbiting accents and a soft glow, on the initial document load and each browser refresh. The loading boundary lives above the router, so navigation between pages never replays it. It waits for the document load with a short minimum display time and a 4.5-second fallback; reduced-motion preferences receive a brief static logo. All loader colors derive from the central theme variables.
+The portrait in `public/loading-logo.png` emerges from a muted silhouette through a rising wave, orange light sweep, and soft reflection, surrounded by the existing orbit and glow. It appears on the initial document load and each browser refresh. The loading boundary lives above the router, so navigation between pages never replays it. It waits for the document load with a short minimum display time and a 4.5-second fallback; reduced-motion preferences receive a brief static portrait. The accent effects use the central theme variables.
+
+The navbar combines `public/loading-logo.png` with real text for “Yasser Salem.” A light reflection travels across the portrait and lettering, with long pauses between sweeps; hover and keyboard focus add a gentle portrait tilt and glow. Text and accent colors adapt to the selected theme through the shared variables. Reduced-motion preferences display a static logo. `src/components/ui/Logo.jsx` defines the mark, and `src/index.css` contains its sizing and effects.
 
 The navbar reuses the same `BrandMark` in a compact size, without captions. Its letters remain filled with a gentle wave and a slower orbit; clicking the mark returns home. Reduced-motion preferences use a static, fully filled mark.
 
@@ -66,6 +68,14 @@ Profile assets and navigation can be updated in `src/data/portfolio.js`. The hom
 The included `vercel.json` rewrites application paths to `index.html`, so direct visits and refreshes at `/contact`, `/about`, and project detail pages work on Vercel. Other static hosts need an equivalent SPA fallback. Vite handles this during development and preview.
 
 Typography uses Google Fonts with system font fallbacks.
+
+## Page animations
+
+Every page has a distinct animated atmosphere: orbital accents on Home, flowing lines on About, circuit traces on Skills, ribbons on Projects, a moving timeline on Experience, and signal rings on Contact. Glass panels include a pointer spotlight and a passing reflection. Visual project cards and the developer card gently tilt on desktop. Statistics count up when revealed, portraits enter softly, and headlines and cards reveal in sequence. Experience panels replay their entry when selected, and the project viewer opens with a short transition.
+
+`src/hooks/usePageMotion.js` coordinates native Web Animations and IntersectionObserver, waits for the initial logo loader, and cleans up on navigation. `src/styles/motion.css` contains the effect styles. Add `data-reveal="rise|slide|soft|zoom|mask"`, optional `data-reveal-delay` in milliseconds, `data-glass`, or `data-tilt` to extend the system. `MotionAtmosphere` and `AnimatedNumber` are shared UI components. No animation dependency is required.
+
+Content remains visible if animation APIs are unavailable. Reduced-motion preferences disable the effects, retain the final statistics, and show the complete page. Pointer effects are limited to desktop mouse input, ambient motion pauses in hidden tabs, and keyboard focus immediately reveals the focused content. Decorative layers never intercept clicks or change the page layout.
 
 ## Colors and dark mode
 

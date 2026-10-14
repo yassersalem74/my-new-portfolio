@@ -6,7 +6,7 @@ import DeveloperCard from './DeveloperCard'
 
 function SketchArrow({ className = '' }) {
   return (
-    <svg viewBox="0 0 70 85" fill="none" className={className} aria-hidden="true">
+    <svg viewBox="0 0 70 85" fill="none" className={`motion-sketch ${className}`} aria-hidden="true">
       <path d="M12 5c35 17 43 43 24 68m0 0 3-20m-3 20 18-8" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   )
@@ -14,7 +14,7 @@ function SketchArrow({ className = '' }) {
 
 export default function HeroVisual() {
   return (
-    <div className="relative mx-auto h-[400px] w-full max-w-[650px] min-[380px]:h-[450px] sm:h-[560px] lg:h-[min(520px,calc(100svh-152px))] lg:max-w-[600px]">
+    <div data-reveal="zoom" className="motion-portrait relative mx-auto h-[400px] w-full max-w-[650px] min-[380px]:h-[450px] sm:h-[560px] lg:h-[min(520px,calc(100svh-152px))] lg:max-w-[600px]">
       <div aria-hidden="true" className="absolute inset-0 overflow-hidden">
         <div className="absolute top-[14%] right-[15%] h-[68%] w-[57%] -skew-x-25 rounded-[70px] border border-primary/10 bg-gradient-to-b from-glow-strong to-glow" />
         <div className="absolute top-[6%] right-[9%] h-[80%] w-[33%] -skew-x-30 rounded-[65px] bg-glow" />
@@ -32,15 +32,15 @@ export default function HeroVisual() {
       <img src={profile.image} alt="Yasser Salem, Front-End Developer and Technical Instructor" width="1122" height="1402" fetchPriority="high" className="absolute top-0 right-0 z-10 h-[76%] w-[80%] rounded-[2rem] object-cover object-top [mask-image:linear-gradient(to_bottom,black_85%,transparent)] sm:top-auto sm:right-[8%] sm:bottom-[4%] sm:h-[92%] sm:w-[78%]" />
 
       <ul aria-label="Technologies I work with" className="absolute inset-x-0 bottom-0 z-20 grid grid-cols-2 gap-2.5 sm:inset-x-auto sm:top-[10%] sm:right-[-2%] sm:bottom-auto sm:flex sm:flex-col lg:right-[-4%] lg:gap-2">
-        {technologies.map(({ name, id }) => (
-          <li key={id} className="flex h-11 items-center gap-2 rounded-2xl border border-border bg-surface/90 px-3 shadow-card backdrop-blur-sm sm:h-14 sm:w-[160px] sm:gap-3 sm:px-4 lg:h-[clamp(2.25rem,6.5svh,3rem)] lg:w-[136px] lg:gap-2 lg:px-3">
+        {technologies.map(({ name, id }, index) => (
+          <li key={id} data-glass data-reveal="slide" data-reveal-delay={160 + index * 70} style={{ '--float-delay': `${index * -1.4}s` }} className="motion-float relative flex h-11 items-center gap-2 rounded-2xl border border-border bg-surface/90 px-3 shadow-card backdrop-blur-sm sm:h-14 sm:w-[160px] sm:gap-3 sm:px-4 lg:h-[clamp(2.25rem,6.5svh,3rem)] lg:w-[136px] lg:gap-2 lg:px-3">
             <TechLogo name={id} className="size-6 shrink-0 sm:size-8 lg:size-7" />
             <span className="text-[10px] font-semibold whitespace-nowrap text-ink sm:text-xs lg:text-[11px]">{name}</span>
           </li>
         ))}
       </ul>
 
-      <Link to="/experience" className="group absolute right-0 bottom-[10%] z-20 hidden w-[148px] rounded-[22px] border border-border bg-surface/95 p-5 shadow-card transition-shadow hover:shadow-card-hover sm:block lg:right-[-4%] lg:bottom-[18%] lg:w-[136px] lg:p-3.5">
+      <Link to="/experience" data-glass data-reveal="rise" data-reveal-delay="320" className="motion-float group absolute right-0 bottom-[10%] z-20 hidden w-[148px] rounded-[22px] border border-border bg-surface/95 p-5 shadow-card transition-shadow hover:shadow-card-hover sm:block lg:right-[-4%] lg:bottom-[18%] lg:w-[136px] lg:p-3.5">
         <UsersRound size={30} strokeWidth={1.7} className="mb-3 text-accent lg:mb-2 lg:size-6" aria-hidden="true" />
         <p className="text-xs leading-relaxed font-bold sm:text-sm lg:text-xs">Technical<br />Instructor</p>
         <div className="mt-2 flex items-center justify-between">

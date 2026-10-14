@@ -68,11 +68,11 @@ export default function ContactForm() {
   }
 
   return (
-    <section aria-labelledby="contact-form-heading" className="w-full rounded-3xl border border-border bg-surface/95 p-5 shadow-card sm:p-7 lg:p-4">
+    <section aria-labelledby="contact-form-heading" data-glass data-reveal="rise" data-reveal-delay="140" className="motion-form relative w-full rounded-3xl border border-border bg-surface/95 p-5 shadow-card sm:p-7 lg:p-4">
       <div className="flex items-start gap-3">
         <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-accent lg:size-9"><MessageSquareText size={24} strokeWidth={1.7} aria-hidden="true" /></span>
         <div className="min-w-0 flex-1"><h2 id="contact-form-heading" className="text-lg font-extrabold tracking-[-0.025em] sm:text-xl lg:text-lg">Send Me a Message</h2><p className="mt-1 text-xs leading-6 text-muted sm:text-sm lg:mt-0.5 lg:text-xs lg:leading-5">Fill out the form and I’ll get back to you as soon as possible.</p></div>
-        <Send size={30} strokeWidth={1.5} className="hidden shrink-0 -rotate-12 text-accent sm:block" aria-hidden="true" />
+        <Send size={30} strokeWidth={1.5} className="motion-paperplane hidden shrink-0 -rotate-12 text-accent sm:block" aria-hidden="true" />
       </div>
 
       <form action={contactAction} method="POST" onSubmit={handleSubmit} aria-busy={isSending} className="mt-5 lg:mt-3" onInput={event => { event.target.setCustomValidity?.(''); if (!inFlight.current && status !== 'idle') setStatus('idle') }}>
@@ -95,8 +95,8 @@ export default function ContactForm() {
           </label>
         </fieldset>
 
-        {status === 'success' && <p role="status" className="mt-4 flex items-start gap-2 rounded-xl bg-success-soft p-3 text-sm leading-6 text-success"><CheckCircle2 size={18} className="mt-0.5 shrink-0" aria-hidden="true" />Your message was submitted. Thank you for reaching out!</p>}
-        {['error', 'unavailable', 'timeout', 'rate-limited'].includes(status) && <div role="alert" className="mt-4 rounded-xl bg-error-soft p-3 text-sm leading-6 text-error">
+        {status === 'success' && <p role="status" data-reveal="rise" className="mt-4 flex items-start gap-2 rounded-xl bg-success-soft p-3 text-sm leading-6 text-success"><CheckCircle2 size={18} className="mt-0.5 shrink-0" aria-hidden="true" />Your message was submitted. Thank you for reaching out!</p>}
+        {['error', 'unavailable', 'timeout', 'rate-limited'].includes(status) && <div role="alert" data-reveal="rise" className="mt-4 rounded-xl bg-error-soft p-3 text-sm leading-6 text-error">
           <p>{status === 'unavailable' ? 'Message delivery is waiting for email verification. Your draft is still here.' : status === 'rate-limited' ? 'Too many messages were sent recently. Please wait a little before trying again. Your draft is still here.' : status === 'timeout' ? 'The service took too long to confirm your submission. Your draft is still here.' : 'We couldn’t confirm your submission. Your draft is still here.'} You can <a href={`mailto:${contact.email}`} className="font-bold underline underline-offset-2">email me directly</a>.</p>
           {status === 'error' && <button type="button" onClick={handleVerifiedSubmit} className="mt-2 font-bold underline underline-offset-2">Continue to secure submission <span className="font-normal">(opens a verification page)</span></button>}
         </div>}

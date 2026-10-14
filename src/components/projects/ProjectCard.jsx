@@ -4,13 +4,13 @@ import { Link } from 'react-router'
 import ProjectCover from './ProjectCover'
 import { getGithubUrl } from '../../utils/projectPreview'
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, index = 0 }) {
   const [failedImage, setFailedImage] = useState(null)
   const [failedMobileImage, setFailedMobileImage] = useState(null)
   const hasImage = project.image && failedImage !== project.image
   const githubUrl = getGithubUrl(project.url, window.location.origin)
   return (
-    <article aria-labelledby={`project-${project.id}`} className="group relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-border bg-surface/90 text-left shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-card-hover motion-reduce:transform-none">
+    <article aria-labelledby={`project-${project.id}`} data-glass data-tilt data-reveal="zoom" data-reveal-delay={index * 80} className="group relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-border bg-surface/90 text-left shadow-card transition duration-200 hover:-translate-y-1 hover:shadow-card-hover motion-reduce:transform-none">
       {githubUrl ? (
         <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label={`Open ${project.title} on GitHub (opens in a new tab)`} title="Open GitHub in a new tab" className="absolute inset-0 z-30 rounded-[inherit] focus-visible:outline-offset-[-3px]" />
       ) : (
